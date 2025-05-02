@@ -146,6 +146,11 @@ We added
 
 ![New Dashboard](https://github.com/ObedNyakundi/Rental-house-management-system/blob/main/smsnotify.png)
 
+PHP - The main server-side programming language
+Bootstrap - For responsive design and UI components
+jQuery - For JavaScript functionality
+MySQL - For the database (indicated by the database directory
+
 # Special Thanks to:
 - [Obed Nyakundi](https://github.com/ObedNyakundi)
 - [Ukwaju Systems](https://ukwaju.systems/)
