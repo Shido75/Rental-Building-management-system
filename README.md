@@ -57,9 +57,9 @@ View a demonstration [here:](https://youtu.be/H1gM3E5sZPs)
  - edit the details of the following to match your server connection details:
  ```
 $host= 'YourHost';
-$user='YourDatabaseUserName';
-$usrpassword='YourDBPassword';
-$database='YourDBName';
+$user='root';
+$usrpassword= '';
+$database='society';
 
  ``` 
  - To enable sending SMS via the system, update the variables under:
@@ -145,11 +145,6 @@ We added
 - Theme color changes for better visibility
 
 ![New Dashboard](https://github.com/ObedNyakundi/Rental-house-management-system/blob/main/smsnotify.png)
-
-PHP - The main server-side programming language
-Bootstrap - For responsive design and UI components
-jQuery - For JavaScript functionality
-MySQL - For the database (indicated by the database directory
 
 # Special Thanks to:
 - [Obed Nyakundi](https://github.com/ObedNyakundi)

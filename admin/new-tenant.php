@@ -47,6 +47,7 @@
                         $prof=is_username($_POST['prof']);
                         $dateAdmitted=date('20y-m-d');
                         $house=uncrack($_POST['house']); //a combination of room ID and number of rooms
+                        $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hash the password
 
                         //format phone number
                         if(substr($phone, 0,1)=='0'){
@@ -83,7 +84,7 @@
                         
                         //A query to add tenant
                         $sq_tenants="INSERT into `tenants` 
-                            (`houseNumber`,`tenant_name`,`email`,`ID_number`,`profession`,`phone_number`,`dateAdmitted`) values('$houseid','$tname','$temail','$idnum','$prof','$phone','$dateAdmitted');";
+                            (`houseNumber`,`tenant_name`,`email`,`ID_number`,`profession`,`phone_number`,`dateAdmitted`,`password`) values('$houseid','$tname','$temail','$idnum','$prof','$phone','$dateAdmitted','$password');";
 
                         //A query to update houses
                         $sq_houses="UPDATE `houses` SET `number_of_rooms`='$noOfRooms', `house_status`='$houseStatus' WHERE `houseID`='$houseid'";
@@ -200,6 +201,13 @@
                                             <div class="input-group">
                                                 <div class="input-group-addon"><i class="fa fa-phone"></i></div>
                                                 <input type="number" min="0" name="phone" class="form-control" id="phone" placeholder="e.g 254 712 345678" required=""> </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="password">Password: *</label>
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><i class="fa fa-lock"></i></div>
+                                                <input type="password" name="password" class="form-control" id="password" placeholder="Enter password" required=""> </div>
                                         </div>
 
                                         <div class="form-group">
