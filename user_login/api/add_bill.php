@@ -14,7 +14,7 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
 // Get POST data
 $data = json_decode(file_get_contents('php://input'), true);
 
-if (!isset($data['tenant_id']) || !isset($data['bill_type']) || !isset($data['amount']) || !isset($data['due_date'])) {
+if (!isset($data['tenantID']) || !isset($data['bill_type']) || !isset($data['amount']) || !isset($data['due_date'])) {
     die(json_encode(['success' => false, 'message' => 'Missing required fields']));
 }
 
@@ -38,7 +38,7 @@ try {
 
     // Check if tenant exists
     $stmt = $conn->prepare("SELECT tenantID FROM tenants WHERE tenantID = ?");
-    $stmt->bind_param("i", $data['tenant_id']);
+    $stmt->bind_param("i", $data['tenantID']);
     $stmt->execute();
     $result = $stmt->get_result();
     
@@ -48,7 +48,7 @@ try {
 
     // Insert new bill
     $stmt = $conn->prepare("INSERT INTO bills (tenant_id, bill_type, amount, due_date) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("isds", $data['tenant_id'], $data['bill_type'], $data['amount'], $due_date);
+    $stmt->bind_param("isds", $data['tenantID'], $data['bill_type'], $data['amount'], $due_date);
 
     if (!$stmt->execute()) {
         throw new Exception("Error adding bill: " . $stmt->error);

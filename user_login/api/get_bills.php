@@ -14,7 +14,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 $tenant_id = $_SESSION['tenant_id'];
 
 try {
-    // Get tenant bills with house information
+    // Get tenant bills with complete tenant and house information
     $stmt = $conn->prepare("SELECT 
         b.billID,
         b.bill_type,
@@ -22,10 +22,17 @@ try {
         b.due_date,
         b.status,
         b.created_at,
+        t.tenantID,
         t.tenant_name,
+        t.email,
+        t.phone_number,
+        t.ID_number,
         t.account as balance,
+        t.houseNumber,
         h.house_name,
-        h.rent_amount
+        h.rent_amount,
+        h.location,
+        h.description as house_description
         FROM bills b
         JOIN tenants t ON b.tenant_id = t.tenantID
         JOIN houses h ON t.houseNumber = h.houseID
@@ -52,8 +59,21 @@ try {
             'due_date' => $row['due_date'],
             'status' => $row['status'],
             'created_at' => $row['created_at'],
-            'house_name' => $row['house_name'],
-            'rent_amount' => $row['rent_amount']
+            'tenant_info' => [
+                'tenant_id' => $row['tenantID'],
+                'name' => $row['tenant_name'],
+                'email' => $row['email'],
+                'phone' => $row['phone_number'],
+                'id_number' => $row['ID_number'],
+                'balance' => $row['balance'],
+                'house_info' => [
+                    'house_id' => $row['houseNumber'],
+                    'house_name' => $row['house_name'],
+                    'rent_amount' => $row['rent_amount'],
+                    'location' => $row['location'],
+                    'description' => $row['house_description']
+                ]
+            ]
         ];
     }
 
